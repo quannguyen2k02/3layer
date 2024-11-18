@@ -10,6 +10,6 @@ namespace DataAccessLayer.Interface
     public interface ICustomerRepository
     {
         public Task<IEnumerable<Customer>> GetCustomersAsync();
-        public Task<Customer> AddNewCustomer(Customer customer);
+        public Task<Customer> AddCustomer(Customer customer);
     }
 }

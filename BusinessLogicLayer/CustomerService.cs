@@ -1,4 +1,6 @@
-﻿using DataAccessLayer.Entities;
+﻿using AutoMapper;
+using DataAccessLayer.DataDTO;
+using DataAccessLayer.Entities;
 using DataAccessLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -11,24 +13,29 @@ namespace BusinessLogicLayer
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
+        private readonly IMapper _mapper;
 
-        public CustomerService(ICustomerRepository customerRepository) {
+        public CustomerService(ICustomerRepository customerRepository, IMapper mapper) {
             _customerRepository = customerRepository;
+            _mapper = mapper;
         }
 
-        public async Task<Customer> AddNewCustomerAsync(Customer customer)
+        public async Task<Customer> AddCustomerAsync(CustomerDTO customer)
         {
             if(customer == null)
             {
                 throw new ArgumentNullException(nameof(customer), "Customer cannot be null.");
             }
-            var customer1 = await _customerRepository.AddNewCustomer(customer);
+            var c = _mapper.Map<Customer>(customer);
+            var customer1 = await _customerRepository.AddCustomer(c);
             return customer1;
         }
 
-        public async Task<IEnumerable<Customer>> GetCustomersAsync()
+        public async Task<IEnumerable<CustomerDTO>> GetCustomersAsync()
         {
-            return await _customerRepository.GetCustomersAsync();
+            var customers = await _customerRepository.GetCustomersAsync();
+            var customerDTOs = _mapper.Map<IEnumerable<CustomerDTO>>(customers);
+            return customerDTOs;
         }
     }
 }

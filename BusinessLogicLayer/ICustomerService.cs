@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Entities;
+﻿using DataAccessLayer.DataDTO;
+using DataAccessLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace BusinessLogicLayer
 {
     public interface ICustomerService
     {
-        public Task<IEnumerable<Customer>> GetCustomersAsync();
-        public Task<Customer> AddNewCustomerAsync(Customer customer);
+        public Task<IEnumerable<CustomerDTO>> GetCustomersAsync();
+        public Task<Customer> AddCustomerAsync(CustomerDTO customer);
     }
 }

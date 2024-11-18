@@ -17,7 +17,7 @@ namespace DataAccessLayer.Interface
             _context = context;
         }
 
-        public async Task<Customer> AddNewCustomer(Customer customer)
+        public async Task<Customer> AddCustomer(Customer customer)
         {
             _context.Add(customer);
             await  _context.SaveChangesAsync();

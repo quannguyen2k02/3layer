@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer;
+using DataAccessLayer.DataDTO;
 using DataAccessLayer.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,10 +22,14 @@ namespace _3layer.Controllers
             return Ok(customers);
         }
         [HttpPost]
-        public async Task<IActionResult> AddNewCustomer(Customer customer)
+        public async Task<IActionResult> AddCustomer(CustomerDTO customer)
         {
-            var c  = await _customerService.AddNewCustomerAsync(customer);
-            return Ok(c);
+            if(ModelState.IsValid)
+            {
+                var c = await _customerService.AddCustomerAsync(customer);
+                return Ok(c);
+            }
+            return BadRequest();
         }
     }
 }
