@@ -1,7 +1,5 @@
 ﻿using BusinessLogicLayer;
 using DataAccessLayer.DataDTO;
-using DataAccessLayer.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _3layer.Controllers
